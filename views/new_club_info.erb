@@ -1,0 +1,27 @@
+
+<h1>New Club Information</h1>
+
+<hr>
+
+<h2></h2>
+
+<br>
+
+<div>
+  <p>
+    <%= @source %> </p>
+  <p>
+    Club Name: <b><%= @club.name %></b></p>
+  <p>Member List:</p>
+  <ul>
+    <% @memberlist.each do |m| %>
+      <li><%= m.name %> </li>
+    <% end %>
+  </ul>
+  </div>
+  
+<br>
+<br>
+<a href="/">Return to Main Page</a>
+  
+

@@ -1,5 +1,6 @@
 require "sinatra"
 require "sqlite3"
+require "pry"
 
 DATABASE = SQLite3::Database.new('dinnerclubweb.db')
 
@@ -13,15 +14,41 @@ get "/" do
 end
 
 get "/create_new_form" do
+  #@source = request.path_info
   erb :create_new_form, :layout => :boilerplate
 end
 
-get "/club_info" do
-  #if from 'create_new_form' -> sourcevar = "New"
-  #x=request.path_info
+get "/new_club_info" do
+  @source = request.referer
 
-  erb :club_info, :layout => :boilerplate
+  @club = DinnerClub.new({"name" => params["clubname"]})
+  @club.insert
+  @members = params["members"].split", "
+  @memberlist = []
+  @members.each do |m|
+    newperson = Person.new({"name"=>m,"club_id"=>@club.id})
+    newperson.insert
+    @memberlist << newperson
+  end
+  binding.pry
+
+  erb :new_club_info, :layout => :boilerplate
   
+end
+
+get "/existing" do
+  @source = request.path_info
+  erb :existing_club, :layout => :boilerplate
+  
+end
+
+get "/edit_options" do
+  if params["clubname"]
+    @club = DinnerClub.where_name(params["clubname"])
+  else
+    @club = DinnerClub.find("dinnerclub",params["id"])
+  end
+  erb :edit_options, :layout => :boilerplate
 end
 
 # get "/greet" do

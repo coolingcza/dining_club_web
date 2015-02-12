@@ -1,22 +1,18 @@
-<h1>Enter Club Indentifier:</h1>
+<h1>Select Club to Edit:</h1>
 
   <form action="/edit_options" method="get">
 
     <div>
-      Club Name:
       <br>
-      <input type="text" name="clubname">
-      <input type="submit" value="Submit">
-    </div>
-    
-  </form>
-  <form action="/edit_options" method="get">
-    
-    <div>
-      Club ID:
-      <br>
-      <input type="text" name="clubid">
-      <input type="submit" value="Submit">
-    </div>
 
+      <label for="clubname">Select name of club:</label>
+      <select name="clubname">
+      <% @clublist.each do |c| %>
+        <option value="<%= c.name %>"> <%= c.name %></option>
+      <% end %>
+      </select>
+      
+      <input type="submit" value="Submit">
+    </div>
+    
   </form>

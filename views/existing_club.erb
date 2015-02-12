@@ -3,20 +3,15 @@
   <form action="/display_club_info" method="get">
 
     <div>
-      Club Name:
-      <br>
-      <input type="text" name="clubname">
+      <label for="clubid">Select name of club:</label>
+      <select name="clubid">
+      <% @clublist.each do |c| %>
+        <option value= <%= c.id %> > <%= c.name %> </option>
+      <% end %>
+      </select>
+      
       <input type="submit" value="Submit">
     </div>
-    
   </form>
-  <form action="/display_club_info" method="get">
-    
-    <div>
-      Club ID:
-      <br>
-      <input type="text" name="clubid">
-      <input type="submit" value="Submit">
-    </div>
+  
 
-  </form>

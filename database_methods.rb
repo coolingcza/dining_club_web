@@ -1,28 +1,105 @@
+# Module: DatabaseClassMethods
+#
+# Facilitates Class interaction with dinnerclubweb database.
+#
+# Public Methods:
+# #find
+# #all
+# #find_by_attr
+
 module DatabaseClassMethods
+  
+  # Public: find
+   # Inserts the newly created item into the database.
+   #
+   # Parameters:
+   # table     - String: the table being searched.
+   # record_id - Number: row id number.
+   #
+   # Returns: 
+   # An object generated from information returned from database.
+   #
+   # State changes:
+   # none.
   
   def find(table, record_id)
     results = DATABASE.execute("SELECT * FROM #{table} 
                                 WHERE id = #{record_id}")
     record_details = results[0] # Hash of the record's details.
-    record_details
     self.new(record_details)
   end
   
+  # Public: all
+   # Returns all rows of a given table.
+   #
+   # Parameters:
+   # table - String: the table of interest.
+   #
+   # Returns: 
+   # An array populated with objects.
+   #
+   # State changes:
+   # none.
+  
   def all(table)
     results = DATABASE.execute("SELECT * FROM #{table}")
-    puts results
+    results_as_objects = []
+
+    results.each do |r|
+      results_as_objects << self.new(r)
+    end
+
+    results_as_objects
   end
+  
+  # Public: find_by_attr
+   # Searches a given database table for rows with fields matching a given
+   # value.
+   #
+   # Parameters:
+   # table - String: the table of interest.
+   # field - String: the field name to search in table.
+   # value - Number or String: value in table to match.
+   #
+   # Returns: 
+   # @id the primary key for the product key.
+   #
+   # State changes:
+   # Selected values are updated in the database.
+  
+  def find_by_attr(table, field, value)
+    #set value with ' ' if string
+    value = "'#{value}'" if value.is_a? String
+    
+    results = DATABASE.execute("SELECT * FROM #{table} 
+                                WHERE #{field} = #{value}")
+    results_as_objects = []
+
+    results.each do |r|
+      results_as_objects << self.new(r)
+    end
+
+    results_as_objects
+    
+  end
+    
   
 end
 
 
 module DatabaseInstanceMethods
-  
-  # Take all the attributes for this object and make sure
-  # those are the values in this object's corresponding row
-  # in the "students" table.
-  #
-
+    
+  # Public: insert
+   # Inserts the newly created item into the database.
+   #
+   # Parameters:
+   # none
+   #
+   # Returns: 
+   # @id: the primary key for the new row.
+   #
+   # State changes:
+   # New row is created in the database.
     
   def insert
   
@@ -41,13 +118,13 @@ module DatabaseInstanceMethods
       end
     end
   
-    #binding.pry
-  
     DATABASE.execute("INSERT INTO #{@table} (#{attributes.join(", ")}) 
                       VALUES (#{values.join(", ")})")
     @id = DATABASE.last_insert_row_id
-    #binding.pry
+
   end
+
+
 
   def save
     attributes = []
@@ -76,8 +153,9 @@ module DatabaseInstanceMethods
     DATABASE.execute("UPDATE #{@table} SET #{query_string} WHERE id = #{id}")
   end
   
+  
+  
   def delete
-    binding.pry
     DATABASE.execute("DELETE from #{table} WHERE id = #{id}")
   end
 

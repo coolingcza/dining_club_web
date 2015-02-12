@@ -15,16 +15,23 @@
           <br>
           Enter new name: <input type="text" name="newclubname">
           <input type="submit" value="Submit">
+          <input type="hidden" name="clubid" value=<%= @club.id %>>
         </form>
       </li>
       <li>
         <form action="/display_club_info" method="get">
           <b>Change Member Name</b>
           <br>
-          Current member name: <input type="text" name="oldmemname">
+          Current member name:
+          <select name="oldmemname">
+          <% @memberlist.each do |m| %>
+            <option value= <%= m.name %> > <%= m.name %> </option>
+          <% end %>
+          </select>
           <br>
           New member name:   <input type="text" name="newmemname">
           <input type="submit" value="Submit">
+          <input type="hidden" name="clubid" value=<%= @club.id %>>
         </form>
       </li>
       <li>
@@ -33,14 +40,21 @@
           <br>
           Member name to add: <input type="text" name="addmemname">
           <input type="submit" value="Submit">
+          <input type="hidden" name="clubid" value=<%= @club.id %>>
         </form>
       </li>
       <li>
         <form action="/display_club_info" method="get">
           <b>Remove Member</b>
           <br>
-          Member name to remove: <input type="text" name="remmemname">
+          Member name to remove:
+          <select name="remmemname">
+          <% @memberlist.each do |m| %>
+            <option value= <%= m.name %> > <%= m.name %> </option>
+          <% end %>
+          </select>
           <input type="submit" value="Submit">
+          <input type="hidden" name="clubid" value=<%= @club.id %>>
         </form>
       </li>
     </ul>

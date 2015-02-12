@@ -146,9 +146,9 @@ class DinnerClub
   # State Changes:
   # @member_list updated with new member key = new Person object.
   
-  def add_member(new_member)
-    @member_list[new_member] = Person.new(new_member, @id)
-  end
+  # def add_member(new_member)
+  #   @member_list[new_member] = Person.new(new_member, @id)
+  # end
   
   # Public: #rem_member
   # Removes member from @member_list.
@@ -162,9 +162,9 @@ class DinnerClub
   # State Changes:
   # Item in @member_list is removed.
   
-  def remove_member(member)
-    @member_list.delete(member)
-  end
+  # def remove_member(member)
+  #   @member_list.delete(member)
+  # end
   
   # Public: #event_go
   # Generates CheckSplitter object, calls #check_members, #upd_running_totals,

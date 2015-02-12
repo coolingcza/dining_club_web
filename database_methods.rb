@@ -72,13 +72,13 @@ module DatabaseInstanceMethods
     
     query_string = query_components_array.join(", ")
     # name = 'Sumeet', age = 75, hometown = 'San Diego'
-    binding.pry
+
     DATABASE.execute("UPDATE #{@table} SET #{query_string} WHERE id = #{id}")
   end
   
   def delete
-    
-    DATABASE.execute("DELETE from #{@table} WHERE id = #{id}")
+    binding.pry
+    DATABASE.execute("DELETE from #{table} WHERE id = #{id}")
   end
 
   

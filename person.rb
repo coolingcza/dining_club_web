@@ -30,15 +30,13 @@ class Person
   def self.where_name(x)
     results = DATABASE.execute("SELECT * FROM person WHERE name = '#{x}'")
 
-    # results_as_objects = []
-    #
-    # results.each do |r|
-    #   results_as_objects << self.new(r)
-    # end
-    #
-    # results_as_objects
-    
-    results
+    results_as_objects = []
+
+    results.each do |r|
+      results_as_objects << self.new(r)
+    end
+
+    results_as_objects
   end
   
   # Public: .where_club_id
@@ -86,76 +84,6 @@ class Person
 
   end
   
-  # def insert
-  #   DATABASE.execute("INSERT INTO person (name, club_id)
-  #                     VALUES ('#{name}', #{club_id})")
-  #   @id = DATABASE.last_insert_row_id
-  #
-  # end
-  
-  # Take all the attributes for this object and make sure
-  # those are the values in this object's corresponding row
-  # in the "students" table.
-  #
-  # def save
-  #   attributes = []
-  #
-  #   # Example  [:@name, :@age, :@hometown]
-  #   instance_variables.each do |i|
-  #     # Example  :@name
-  #     attributes << i.to_s.delete("@") # "name"
-  #   end
-  #
-  #   query_components_array = []
-  #
-  #   attributes.each do |a|
-  #     value = self.send(a)
-  #
-  #     if value.is_a?(Integer)
-  #       query_components_array << "#{a} = #{value}"
-  #     else
-  #       query_components_array << "#{a} = '#{value}'"
-  #     end
-  #   end
-  #
-  #   query_string = query_components_array.join(", ")
-  #   # name = 'Sumeet', age = 75, hometown = 'San Diego'
-  #   binding.pry
-  #   DATABASE.execute("UPDATE person SET #{query_string} WHERE id = #{id}")
-  # end
-  
-  # Public: #spend
-  # Adds amt parameter to @spending_amt.
-  #
-  # Parameters:
-  # amt - Number: person's bill from Dining Club Event.
-  #
-  # Returns:
-  # Updated @spending_amt.
-  #
-  # State Changes:
-  # Increases @spending_amt.
-  
-  def spend(amt)
-    @spending_amt += amt
-  end
-  
-  # Public: #places
-  # Adds location to @destinations array.
-  #
-  # Parameters:
-  # dest - String: location of Dining Club Event.
-  #
-  # Returns:
-  # Updated @destinations.
-  #
-  # State Changes:
-  # Updates @destinations.
-  
-  def places(dest)
-    @destinations << dest
-  end
-  
-  
+
   
 end

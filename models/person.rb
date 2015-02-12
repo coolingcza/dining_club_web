@@ -8,8 +8,8 @@
 # @destinations - Array: emtpy at initialization.
 #
 # Public Methods:
-# #spend
-# #places
+# #
+# #
 
 class Person
   
@@ -28,7 +28,7 @@ class Person
   # Returns: Array: Containing matching person records.
   
   def self.where_name(x)
-    results = DATABASE.execute("SELECT * FROM person WHERE name = '#{x}'")
+    results = DATABASE.execute("SELECT * FROM people WHERE name = '#{x}'")
 
     results_as_objects = []
 
@@ -48,7 +48,7 @@ class Person
   # Returns: Array: Containing matching person objects.
   
   def self.where_club_id(x)
-    results = DATABASE.execute("SELECT * FROM person WHERE club_id = #{x}")
+    results = DATABASE.execute("SELECT * FROM people WHERE club_id = #{x}")
 
     results_as_objects = []
 
@@ -59,28 +59,12 @@ class Person
     results_as_objects
   end
   
-  # Public: .find
-  # Fetch a given record from the 'students' table.
-  #
-  # Parameters:
-  # record_id - Integer: The student's ID in the table.
-  #
-  # Returns: Array: Containing hopefully just one row (as a Hash).
   
-  # def self.find(record_id)
-  #   results = DATABASE.execute("SELECT * FROM person WHERE id = #{record_id}")
-  #   record_details = results[0] # Hash of the record's details.
-  #   record_details
-  #   #self.new(record_details)
-  # end
-  
-  def initialize(options) #name, club_id)
+  def initialize(options)
     @id      = options["id"]
     @name    = options["name"]
     @club_id = options["club_id"]
-    @table   = "person"
-    #@spending_amt = 0
-    #@destinations = []
+    @table   = "people"
 
   end
   

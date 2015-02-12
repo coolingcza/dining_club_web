@@ -1,6 +1,6 @@
 # Module: DatabaseClassMethods
 #
-# Facilitates Class interaction with dinnerclubweb database.
+# Facilitates Class interaction with database.
 #
 # Public Methods:
 # #find
@@ -67,7 +67,7 @@ module DatabaseClassMethods
    # State changes:
    # Selected values are updated in the database.
   
-  def find_by_attr(table, field, value)
+  def where_attr(table, field, value)
     #set value with ' ' if string
     value = "'#{value}'" if value.is_a? String
     
@@ -80,12 +80,19 @@ module DatabaseClassMethods
     end
 
     results_as_objects
-    
   end
     
   
 end
 
+# Module: DatabaseInstanceMethods
+#
+# Facilitates object interaction with database.
+#
+# Public Methods:
+# #insert
+# #save
+# #delete
 
 module DatabaseInstanceMethods
     
@@ -124,7 +131,17 @@ module DatabaseInstanceMethods
 
   end
 
-
+  # Public: save
+   # Updates database with current object values.
+   #
+   # Parameters:
+   # none
+   #
+   # Returns: 
+   # none.
+   #
+   # State changes:
+   # Row values in the database are updated.
 
   def save
     attributes = []
@@ -153,7 +170,17 @@ module DatabaseInstanceMethods
     DATABASE.execute("UPDATE #{@table} SET #{query_string} WHERE id = #{id}")
   end
   
-  
+  # Public: delete
+   # Removes a row from the database.
+   #
+   # Parameters:
+   # none
+   #
+   # Returns: 
+   # none.
+   #
+   # State changes:
+   # Row is removed from the database.
   
   def delete
     DATABASE.execute("DELETE from #{table} WHERE id = #{id}")

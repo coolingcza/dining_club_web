@@ -1,5 +1,27 @@
+# Module: DisplayLogic
+#
+# Assigns some route variables and executes database operations.
+#
+# Public Methods:
+# #new_club_display
+# #existing_club_display
+# #edited_club_display
+# #edit_actions
 
 module DisplayLogic
+
+  # Public: new_club_display
+   # Inserts new club and members into database, assigns
+   # route variables for display.
+   #
+   # Parameters:
+   # none.
+   #
+   # Returns: 
+   # none.
+   #
+   # State changes:
+   # Assigns @club, @memberlist, @vartext.
 
   def new_club_display
     @club = DinnerClub.new({"name" => params["clubname"]})
@@ -15,12 +37,36 @@ module DisplayLogic
   
   end
 
+  # Public: existing_club_display
+   # Assigns route variables for display of existing club info.
+   #
+   # Parameters:
+   # none.
+   #
+   # Returns: 
+   # none.
+   #
+   # State changes:
+   # Assigns @club, @memberlist, @vartext.
+
   def existing_club_display
     @club = DinnerClub.find("dinnerclubs",params["clubid"])
     @memberlist = Person.where_club_id(@club.id)
     @vartext = "Existing Club"
   end
 
+  # Public: edited_club_display
+   # Calls #edit_actions and assigns route variables for display of 
+   # edited club info.
+   #
+   # Parameters:
+   # none.
+   #
+   # Returns: 
+   # none.
+   #
+   # State changes:
+   # Assigns @club, @memberlist, @vartext.
 
   def edited_club_display
     @club = DinnerClub.find("dinnerclubs",params["clubid"])
@@ -29,6 +75,17 @@ module DisplayLogic
     @vartext = "Modified Club Info"
   end
 
+  # Public: edit_actions
+   # Alters @club or @member object and saves changes to database.
+   #
+   # Parameters:
+   # none.
+   #
+   # Returns: 
+   # none.
+   #
+   # State changes:
+   # Modifies database.
 
   def edit_actions
     if params["newclubname"]

@@ -1,0 +1,27 @@
+<h1>New Event Created</h1>
+
+<div>
+  Showing params:<br>
+  <%= params["clubid"] %>
+  <br>
+  <%= params["restaurant"] %>
+  <br>
+  <%= params["bill"] %>
+  <br>
+  <%= params["tip"] %>
+  <br>
+  <%= params["treater"] %>
+  <br>
+  Attendees:
+  <ul>
+  <% @memberlist.each do |m| %>
+  <% if params[m.name.to_s] %>
+    <li><%= m.name %></li>
+    <% end %>
+  <% end %>
+  </ul>
+  
+  
+</div>
+
+<a href="/">Return to Main Page</a>

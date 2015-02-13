@@ -69,19 +69,17 @@ class Event
   # Creates and fills @treater if @treat is true.
   
   def initialize(options)
-    @attendees   = options["attendees"]
-    @destination = options["destination"]
+    #@attendees   = options["attendees"]
+    @destination = options["restaurant"]
     @bill        = options["bill"]
     @club_id     = options["club_id"]
-    @treat       = options["treat"]
-    if @treat
-      puts "Who is treating?"
-      @treater = gets.chomp
-    end
+    @treater     = options["treater"]
+    @table       = "events" 
+
     #record
   end
   
-  def record
+  def insert
     DATABASE.execute("INSERT INTO event (restaurant, club_id) 
                       VALUES ('#{destination}', #{club_id})")
     @id = DATABASE.last_insert_row_id

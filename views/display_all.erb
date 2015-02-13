@@ -1,0 +1,19 @@
+<h1>All Clubs:</h1>
+
+    <% @clublist.each do |c| %>
+    <div>
+      <p><%= c.name %></p>
+      <% mems = Person.where_club_id(c.id) %>
+      <ul>
+      <% mems.each do |m| %>
+
+        <li><%= m.name %></li>
+        <% end %>
+      </ul>
+
+
+    </div>
+    <% end %>
+    
+    
+<a href="/">Return to Main Page</a>

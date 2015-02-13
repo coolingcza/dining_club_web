@@ -1,0 +1,47 @@
+<h1>Enter Event Information:</h1>
+
+<!--Things to know about an event: -->
+<!--id  - not in form, generated when inserted -->
+<!--restaurant -->
+<!--bill -->
+<!-- club id known prior to page? -->
+<!--treater -->
+<!-- attendees -->
+
+<h2>CLUB NAME: <%= @club.name %></h2>
+<hr>
+<div>
+  <form action="/event_confirm" method="GET">
+    Restaurant: <input type="text" name="restaurant">
+    <br>
+    Bill: <input type="text" name="bill">
+    <br>
+    Tip:<br>
+    <input type="radio" name="tip" value="10">10
+    <br>
+    <input type="radio" name="tip" value="15">15
+    <br>
+    <input type="radio" name="tip" value="20">20
+    <br>
+    
+    Select members who attended:
+    <br>
+    <% @memberlist.each do |m| %>
+      <input type="checkbox" name="<%= m.name %>" value="<%= m.name %>" /><%= m.name %><br />
+      <% end %>
+    <br>
+    Did one member treat the rest?
+    <br>
+    If so, select their name:
+    <select name="treater">
+      <option value= "none">None</option>
+    <% @memberlist.each do |m| %>
+      <option value= <%= m.name %> > <%= m.name %> </option>
+    <% end %>
+    </select>
+    <input type="hidden" name="clubid" value="<%= @club.id %>">
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+

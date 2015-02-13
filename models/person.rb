@@ -3,13 +3,14 @@
 # Models a person with relevant attributes.
 #
 # Attributes:
-# @name         - String: person's name.
-# @spending_amt - Number: zero at initialization.
-# @destinations - Array: emtpy at initialization.
+# @name    - String: person's name.
+# @id      - Number: primary key in people table.
+# @club_id - Number: foreign key in people table.
+# @table   - String: "people"
 #
 # Public Methods:
-# #
-# #
+# #where_name
+# #where_club_id
 
 class Person
   
@@ -20,12 +21,12 @@ class Person
   attr_accessor :club_id, :name
   
   # Public: .where_name
-  # Get a list of people with the given name.
+  # Gets a list of people with the given name.
   #
   # Parameters:
   # x - String: The name to search for.
   #
-  # Returns: Array: Containing matching person records.
+  # Returns: Array containing objects for matching person records.
   
   def self.where_name(x)
     results = DATABASE.execute("SELECT * FROM people WHERE name = '#{x}'")
@@ -40,7 +41,7 @@ class Person
   end
   
   # Public: .where_club_id
-  # Get a list of people in the given dining club.
+  # Gets a list of people in the given dining club.
   #
   # Parameters:
   # x - Number: The club id to search for.
@@ -65,9 +66,6 @@ class Person
     @name    = options["name"]
     @club_id = options["club_id"]
     @table   = "people"
-
   end
-  
-
   
 end

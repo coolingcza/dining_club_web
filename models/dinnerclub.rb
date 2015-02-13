@@ -24,7 +24,7 @@ class DinnerClub
   # Parameters:
   # x - String: The name to search for.
   #
-  # Returns: Array: Containing matching dinner club records.
+  # Returns: Array that contains objects for matching dinner club records.
   
   def self.where_name(x)
     results = DATABASE.execute("SELECT * FROM dinnerclubs WHERE name = '#{x}'")
@@ -39,16 +39,18 @@ class DinnerClub
   end
   
   # Public: #initialize
-  # Creates DinnerClub object and populates @member_list with initial values.
+  # Creates DinnerClub object.
   #
   # Parameters:
-  # members - Array: contains member names.
+  # @name  - Array: contains member names.
+  # @id    - Number: derived from dinnerclubs table primary key.
+  # @table - String: "dinnerclubs" - name of associated table
   #
   # Returns:
-  # None.
+  # DinnerClub object.
   #
   # State Changes:
-  # Creates @member_list hash from @members.
+  # New object created.
   
   def initialize(options)
     @name = options["name"]

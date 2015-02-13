@@ -95,9 +95,9 @@ get "/event_confirm" do
   #call checksplitter methods on params to get total bill, per person
   #create entry in events table:
     #@event = Event.new(params[...])
-  #create one entry in eventattend for each attendee:
-    #see event_confirm for iteration
-  #create attendance list by DATABASE/select on eventattend
+  #create one entry in eventattend for each attendee (eventattend=join):
+    #see event_confirm for similar loop
+  #create @attendance_list by DATABASE/select on eventattend
   
   erb :event_confirm, :layout => :boilerplate
 end
